@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123c2b">
+  <meta name="description" content="CropGuard helps farmers explore crop disease symptoms, prevention and management tips.">
+  <title>CropGuard | Crop Disease Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="CropGuard home"><span class="brand-mark">✳</span><span>crop<span>guard</span></span></a>
+    <nav class="desktop-nav">
+      <a href="#how">How it works</a><a href="#detect">Disease checker</a><a href="#library">Crop library</a>
+    </nav>
+    <a class="nav-cta" href="#detect">Check a crop <span>↗</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> SMARTER FARMING STARTS HERE</div>
+        <h1>Healthy crops.<br><em>Stronger</em> harvests.</h1>
+        <p class="hero-lead">Understand crop symptoms, explore common diseases and get practical prevention guidance — all in one place.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#detect">Explore disease checker <span>→</span></a><a class="text-link" href="#how">See how it works</a></div>
+        <div class="hero-proof"><div class="avatar-stack"><i>🌾</i><i>🌱</i><i>🍃</i></div><span>Built to make crop health information easier to access</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="image-frame"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1100&q=85" alt="Green agricultural field"></div>
+        <div class="floating-card"><span class="float-icon">✦</span><div><strong>Knowledge for every field</strong><small>Identify · Understand · Prevent</small></div></div>
+        <div class="art-stamp">GROW<br>BETTER.</div>
+      </div>
+    </section>
+
+    <section class="stat-strip" aria-label="Website features">
+      <div><strong>01</strong><span>Choose your crop</span></div><div><strong>02</strong><span>Describe symptoms</span></div><div><strong>03</strong><span>Explore guidance</span></div><div><strong>04</strong><span>Protect your harvest</span></div>
+    </section>
+
+    <section class="section how-section" id="how">
+      <div class="section-heading"><div><div class="eyebrow">A SIMPLE WORKFLOW</div><h2>From concern to <em>care.</em></h2></div><p>Get started in a few steps. No software installation is required — just open CropGuard in your browser.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-no">01 / SELECT</span><div class="step-icon">🌿</div><h3>Select a crop</h3><p>Choose the crop you want to check from the available crop categories.</p></article>
+        <article class="step-card"><span class="step-no">02 / OBSERVE</span><div class="step-icon">🔎</div><h3>Describe symptoms</h3><p>Upload a photo for reference and select the symptoms you can observe.</p></article>
+        <article class="step-card"><span class="step-no">03 / LEARN</span><div class="step-icon">📋</div><h3>Review guidance</h3><p>Explore possible disease matches, prevention practices and next steps.</p></article>
+      </div>
+    </section>
+
+    <section class="checker-section" id="detect">
+      <div class="checker-intro"><div class="eyebrow light-eyebrow">CROP HEALTH CHECKER</div><h2>Let's understand<br>what your crop <em>needs.</em></h2><p>Choose a crop and the symptoms you notice. You can also add a photo to keep a visual reference during your check.</p><div class="note"><span>ⓘ</span><span>This educational demo uses a symptom-based rule system. It does not run an AI image model or provide a confirmed laboratory diagnosis.</span></div></div>
+      <div class="checker-panel">
+        <form id="diagnosisForm">
+          <div class="form-title"><span>01</span><div><h3>Crop details</h3><p>Tell us what you're growing.</p></div></div>
+          <label for="crop">Select crop</label>
+          <select id="crop" required><option value="">Choose a crop</option><option value="tomato">Tomato</option><option value="potato">Potato</option><option value="corn">Maize (Corn)</option></select>
+          <div class="upload-box" id="dropZone">
+            <input type="file" id="plantImage" accept="image/*" hidden>
+            <div class="upload-icon">↥</div><div><strong>Upload a crop photo</strong><p>JPG, PNG or WEBP · Up to 8 MB</p><span id="fileName">Choose a file or drag it here</span></div>
+            <button type="button" class="browse-btn" id="browseBtn">Browse</button>
+          </div>
+          <img id="imagePreview" class="image-preview" alt="Selected crop preview" hidden>
+          <div class="form-title symptoms-title"><span>02</span><div><h3>Visible symptoms</h3><p>Select all symptoms that apply.</p></div></div>
+          <div id="symptomOptions" class="symptom-grid"><p class="muted">Select a crop first to see relevant symptoms.</p></div>
+          <button class="button button-primary submit-btn" type="submit">Check crop symptoms <span>→</span></button>
+          <p class="form-footnote">For learning and early awareness only. Confirm serious crop problems with a qualified agricultural expert.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="resultSection" class="result-section" hidden aria-live="polite">
+      <div class="result-top"><div><div class="eyebrow">YOUR CHECK RESULTS</div><h2>What your symptoms may indicate</h2></div><button id="resetBtn" class="reset-btn">Start a new check ↻</button></div>
+      <div id="resultContent"></div>
+    </section>
+
+    <section class="section library-section" id="library">
+      <div class="section-heading"><div><div class="eyebrow">LEARN & PREVENT</div><h2>Know the signs.<br><em>Act early.</em></h2></div><p>Explore common crop diseases included in this demonstration library. Always verify diagnosis and treatment locally.</p></div>
+      <div class="library-grid">
+        <article class="disease-card"><div class="disease-visual tomato-visual">🍅</div><div class="disease-body"><span class="tag">TOMATO</span><h3>Early blight</h3><p>Look for brown leaf spots with concentric rings, often on older leaves.</p><a href="#detect" data-crop="tomato" class="library-link">Check tomato symptoms →</a></div></article>
+        <article class="disease-card"><div class="disease-visual potato-visual">🥔</div><div class="disease-body"><span class="tag">POTATO</span><h3>Late blight</h3><p>Water-soaked dark lesions may spread quickly in cool, humid conditions.</p><a href="#detect" data-crop="potato" class="library-link">Check potato symptoms →</a></div></article>
+        <article class="disease-card"><div class="disease-visual corn-visual">🌽</div><div class="disease-body"><span class="tag">MAIZE</span><h3>Common rust</h3><p>Small, raised reddish-brown pustules can appear on leaf surfaces.</p><a href="#detect" data-crop="corn" class="library-link">Check maize symptoms →</a></div></article>
+      </div>
+    </section>
+
+    <section class="callout"><div><div class="eyebrow light-eyebrow">BETTER INFORMATION, BETTER DECISIONS</div><h2>Give every crop<br>a chance to thrive.</h2></div><a class="button button-light" href="#detect">Start a crop check <span>→</span></a></section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">✳</span><span>crop<span>guard</span></span></a><p>Cloud-based crop health information project · CSE2285 · Section 5CIT02</p><span>Educational prototype · Not a substitute for professional diagnosis</span></footer>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
